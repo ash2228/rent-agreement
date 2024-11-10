@@ -364,53 +364,58 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     gsap.registerPlugin(ScrollTrigger);
-    gsap.to("#bg", {
-        y: 300,
-        scrollTrigger: {
-            trgger: ".container",
-            scrub: true,
-            start: "top top",
-            end: `${window.innerHeight.toString()} top`
-        }
-    })
-    let left = document.getElementById("left-container");
-    let right = document.getElementById("right-container");
-    left = [...left.children];
-    right = [...right.children];
-    function animate(item) {
-        return new Promise((resolve) => {
-            gsap.to(item.item1, {
-                boxShadow: " -1px 1px 11px 2px rgba(0,0,0,0.75)",
-                onStart: () => gsap.to(item.item2, {
-                    filter: "brightness(1) grayscale(0)"
-                }),
-                onComplete: () => {
-                    setTimeout(() => {
-                        gsap.to(item.item1, {
-                            boxShadow: null,
-                        });
-                        gsap.to(item.item2, {
-                            filter: "brightness(0.5) grayscale(1)"
 
-                        })
-                        resolve()
-                    }, 2000);
-                }
-            })
-        })
+gsap.to("#bg", {
+    y: 300,
+    scrollTrigger: {
+        trigger: ".container",
+        scrub: true,
+        start: "top top",
+        end: `${window.innerHeight} top`
     }
-    let elems = [];
-    left.map((item, index) => {
-        elems.push({ item1: item, item2: right[index] })
-    })
-    const anim = async () => {
-        while (true) {
-            for (item of elems) {
-                await animate(item)
+});
+
+let left = document.getElementById("left-container").children;
+let right = document.getElementById("right-container").children;
+
+let elems = Array.from(left).map((item, index) => ({
+    item1: item,
+    item2: right[index]
+}));
+
+function animate(item) {
+    return new Promise((resolve) => {
+        gsap.to(item.item1, {
+            boxShadow: " -1px 1px 11px 2px rgba(0,0,0,0.75)",
+            onStart: () => {
+                gsap.to(item.item2, {
+                    filter: "brightness(1) grayscale(0)"
+                });
+            },
+            onComplete: () => {
+                setTimeout(() => {
+                    gsap.to(item.item1, {
+                        boxShadow: "none"
+                    });
+                    gsap.to(item.item2, {
+                        filter: "brightness(0.5) grayscale(1)"
+                    });
+                    resolve();
+                }, 2000);
             }
-        }
+        });
+    });
+}
+
+async function anim() {
+    for (const item of elems) {
+        await animate(item);
     }
-    anim();
+    setTimeout(anim, 500);
+}
+
+anim();
+
 </script>
 
 </html>
