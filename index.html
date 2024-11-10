@@ -145,21 +145,25 @@
             </div>
         </div>
 
-        <h1 class="text-center font-bold text-3xl mt-10 xl:mt-20 xl:text-5xl ">How it <span class="text-primary">Works?</span></h1>
+        <h1 class="text-center font-bold text-3xl mt-10 xl:mt-20 xl:text-5xl ">How it <span
+                class="text-primary">Works?</span></h1>
         <div class="flex w-full mt-16 xl:flex-row flex-col">
             <div class="xl:w-1/2 flex flex-wrap" id="left-container">
-                <div class="w-1/2 flex flex-col cursor-pointer items-center justify-center px-5 py-2 xl:p-0 h-[50vw] overflow-y-scroll pt-20 xl:h-auto xl:overflow-y-auto">
+                <div
+                    class="w-1/2 flex flex-col cursor-pointer items-center justify-center px-5 py-2 xl:p-0 h-[50vw] overflow-y-scroll pt-20 xl:h-auto xl:overflow-y-auto transition-all duration-300">
                     <h1 class="text-3xl font-extrabold">1.</h1>
                     <h1 class="font-bold text-center">Fill Details Online</h1>
-                    <p class="text-sm xl:w-[80%] text-center">Customise our template agreement as per your requirement and submit the
+                    <p class="text-sm xl:w-[80%] text-center">Customise our template agreement as per your requirement
+                        and submit the
                         draft</p>
                 </div>
-                <div class="w-1/2 flex flex-col cursor-pointer items-center justify-center px-5 py-2 xl:p-0 h-[50vw] overflow-y-scroll pt-20 xl:h-auto xl:overflow-y-auto">
+                <div
+                    class="w-1/2 flex flex-col cursor-pointer items-center justify-center px-5 py-2 xl:p-0 h-[50vw] overflow-y-scroll pt-20 xl:h-auto xl:overflow-y-auto transition-all duration-300">
                     <h1 class="text-3xl font-extrabold">2.</h1>
                     <h1 class="font-bold text-center">Stamping & Printing</h1>
                     <p class="text-sm xl:w-[80%] text-center">We print the agreement on a legal stamp paper</p>
                 </div>
-                <div class="w-[200%] flex flex-col mt-5 cursor-pointer justify-center px-5 py-2 xl:p-0">
+                <div class="w-[200%] flex flex-col mt-5 cursor-pointer justify-center px-5 py-2 xl:p-0 transition-all duration-300">
                     <h1 class="text-3xl font-extrabold text-center">3.</h1>
                     <h1 class="font-bold text-center">Agreement is Delivered!
                     </h1>
@@ -173,12 +177,12 @@
                 </div> -->
             </div>
             <div class="xl:columns-2 columns-2 box-border gap-x-1 xl:ml-10 xl:mt-0 mt-10" id="right-container">
-                <div class="xl:h-[10vw] xl:w-[15vw] h-[30vw] flex items-center justify-center  grayscale brightness-50"><img
-                        src="images/fill.jpg" class="h-full w-full object-cover mb-2" alt=""></div>
-                <div class="xl:h-[10vw] xl:w-[15vw] h-[30vw] flex items-center justify-center grayscale brightness-50"><img
-                        src="images/print.jpg" class="h-full w-full object-cover" alt=""></div>
-                <div class="xl:h-[20vw] xl:w-[15vw] h-[60vw] flex items-center justify-center grayscale brightness-50"><img
-                        src="images/dil.jpg" class="h-full w-full object-cover" alt=""></div>
+                <div class="xl:h-[10vw] xl:w-[15vw] h-[30vw] flex items-center justify-center  grayscale brightness-50 transition-all duration-300">
+                    <img src="images/fill.jpg" class="h-full w-full object-cover mb-2" alt=""></div>
+                <div class="xl:h-[10vw] xl:w-[15vw] h-[30vw] flex items-center justify-center grayscale brightness-50 transition-all duration-300">
+                    <img src="images/print.jpg" class="h-full w-full object-cover" alt=""></div>
+                <div class="xl:h-[20vw] xl:w-[15vw] h-[60vw] flex items-center justify-center grayscale brightness-50 transition-all duration-300">
+                    <img src="images/dil.jpg" class="h-full w-full object-cover" alt=""></div>
             </div>
         </div>
         <div class="hidden xl:block mt-16">
@@ -364,58 +368,30 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     gsap.registerPlugin(ScrollTrigger);
-
-gsap.to("#bg", {
-    y: 300,
-    scrollTrigger: {
-        trigger: ".container",
-        scrub: true,
-        start: "top top",
-        end: `${window.innerHeight} top`
-    }
-});
-
-let left = document.getElementById("left-container").children;
-let right = document.getElementById("right-container").children;
-
-let elems = Array.from(left).map((item, index) => ({
-    item1: item,
-    item2: right[index]
-}));
-
-function animate(item) {
-    return new Promise((resolve) => {
-        gsap.to(item.item1, {
-            boxShadow: " -1px 1px 11px 2px rgba(0,0,0,0.75)",
-            onStart: () => {
-                gsap.to(item.item2, {
-                    filter: "brightness(1) grayscale(0)"
-                });
-            },
-            onComplete: () => {
-                setTimeout(() => {
-                    gsap.to(item.item1, {
-                        boxShadow: "none"
-                    });
-                    gsap.to(item.item2, {
-                        filter: "brightness(0.5) grayscale(1)"
-                    });
-                    resolve();
-                }, 2000);
-            }
-        });
-    });
-}
-
-async function anim() {
-    for (const item of elems) {
-        await animate(item);
-    }
-    setTimeout(anim, 500);
-}
-
-anim();
-
+    gsap.to("#bg", {
+        y: 300,
+        scrollTrigger: {
+            trigger: ".container",
+            scrub: true,
+            start: "top top",
+            end: `${window.innerHeight.toString()} top`
+        }
+    })
+    let left = document.getElementById("left-container");
+    let right = document.getElementById("right-container");
+    left = [...left.children];
+    right = [...right.children];
+    let index = 0;
+    setInterval(() => {
+        let thisind = index;
+        left[index].style.boxShadow = "-1px 1px 11px 2px rgba(0,0,0,0.75)"
+        right[index].style.filter = "brightness(1) grayscale(0)"
+        setTimeout(() => {
+            left[thisind].style.boxShadow = "";
+            right[thisind].style.filter = "brightness(0.5) grayscale(1)"
+        }, 2500);
+        index<2?index++:index=0;
+    }, 2500);
 </script>
 
 </html>
