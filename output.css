@@ -724,6 +724,10 @@ video {
   height: 60vw;
 }
 
+.h-\[vw\] {
+  height: vw;
+}
+
 .w-1\/2 {
   width: 50%;
 }
