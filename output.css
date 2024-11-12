@@ -636,6 +636,10 @@ video {
   top: -0.2vw;
 }
 
+.left-0 {
+  left: 0px;
+}
+
 .-z-20 {
   z-index: -20;
 }
@@ -899,6 +903,10 @@ video {
 
 .w-44 {
   width: 11rem;
+}
+
+.w-\[100vw\] {
+  width: 100vw;
 }
 
 .flex-shrink-0 {
